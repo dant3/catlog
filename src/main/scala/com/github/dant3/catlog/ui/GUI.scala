@@ -1,8 +1,8 @@
-package com.github.dant3.catlog
+package com.github.dant3.catlog.ui
 
 import com.github.dant3.catlog.util.GuiThreadExecutor
 import com.googlecode.lanterna.TextColor
-import com.googlecode.lanterna.gui2.{WindowBasedTextGUI, DefaultWindowManager, EmptySpace, MultiWindowTextGUI}
+import com.googlecode.lanterna.gui2._
 import com.googlecode.lanterna.screen.TerminalScreen
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory
 
