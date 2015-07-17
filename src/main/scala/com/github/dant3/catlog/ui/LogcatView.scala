@@ -5,11 +5,11 @@ import com.github.dant3.catlog.adb.{Device, Adb}
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.gui2.AbstractListBox
 
-class LogcatView(size: TerminalSize, val device:Option[Device] = None) extends AbstractListBox[String, LogcatView](size) with Implicits {
+class LogcatView(size: TerminalSize, val device:Option[Device] = None) extends AbstractListBox[LogcatView](size) with Implicits {
   val logcatProcess = startLogcat(addItem)
 
 
-  override def addItem(item:String):Unit = {
+  override def addItem(item:Object):Unit = {
     super.addItem(item)
     setSelectedIndex(getItemCount - 1)
   }
