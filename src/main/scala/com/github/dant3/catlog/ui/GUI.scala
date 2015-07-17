@@ -18,7 +18,10 @@ object GUI {
 
   def run(guiApp: WindowBasedTextGUI ⇒ Unit): Unit = {
     screen.startScreen()
-    guiApp(gui)
-    screen.stopScreen()
+    try {
+      guiApp(gui)
+    } finally {
+      screen.stopScreen()
+    }
   }
 }
