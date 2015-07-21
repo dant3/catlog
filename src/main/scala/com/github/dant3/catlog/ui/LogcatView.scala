@@ -14,13 +14,6 @@ class LogcatView(size: TerminalSize, val device:Option[Device] = None) extends A
     setSelectedIndex(getItemCount - 1)
   }
 
-
-  Runtime.getRuntime.addShutdownHook(new Thread(new Runnable {
-    override def run(): Unit = logcatProcess.destroy()
-  }))
-
-
-
   private def startLogcat(reader:String ⇒ Unit) = device match {
     case Some(dev) ⇒ Adb.logcat(dev)(reader)
     case None ⇒ Adb.logcat(reader)

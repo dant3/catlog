@@ -10,7 +10,7 @@ val libs = new {
   val rxScala = "io.reactivex" %% "rxscala" % "0.25.0"
 
   val scalaTest = "org.scalatest" %% "scalatest" % "2.2.4" % "test"
-  val lanterna = "com.github.avl42" % "lanterna" % "63991beae50a"//"c4eeece81a"
+  val lanterna = "com.github.mabe02" % "lanterna" % "470c4da299"
 
   def repos = Seq(
     "Central snapshots" at "http://repository.apache.org/snapshots/",

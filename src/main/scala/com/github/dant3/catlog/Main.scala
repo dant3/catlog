@@ -1,28 +1,26 @@
 package com.github.dant3.catlog
 
-import com.github.dant3.catlog.adb.{Device, Adb}
+import com.github.dant3.catlog.adb.{Adb, Device}
 import com.github.dant3.catlog.ui.{GUI, LogcatView, Toolbar}
 import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.gui2._
 import com.googlecode.lanterna.gui2.dialogs.{ActionListDialogBuilder, MessageDialogBuilder, MessageDialogButton}
 import com.googlecode.lanterna.input.KeyType
 
-object Main extends HelloWorld with Implicits {
+object Main extends Application with GUI with Implicits {
   val title = "Catlog"
 
   lazy val logcatTermSize = new TerminalSize(170, 38)
   private var logcatView:Option[LogcatView] = None
 
-  def main(args:Array[String]) = {
-    GUI.run { implicit gui ⇒
-
-      gui.addWindowAndWait(new BasicWindow(title) { self ⇒
-        implicit val window = self
-        setComponent(createUi(Adb.devices.headOption))
-      })
-      logcatView.foreach(_.logcatProcess.destroy())
-    }
+  override def runGUI(args: Array[String])(implicit gui: WindowBasedTextGUI): Unit = {
+    gui.addWindowAndWait(new BasicWindow(title) {
+      implicit val self = this
+      setComponent(createUi(Adb.devices.headOption))
+    })
+    logcatView.foreach(_.logcatProcess.destroy())
   }
+
 
   private def createUi(device:Option[Device] = None)(implicit gui:WindowBasedTextGUI, window:Window):Panel = {
     logcatView = Some(logcatView match {
@@ -61,4 +59,5 @@ object Main extends HelloWorld with Implicits {
   private def alert(text:String)(implicit gui:WindowBasedTextGUI) = {
     new MessageDialogBuilder().setTitle(title).setText(text).addButton(MessageDialogButton.OK).build().showDialog(gui)
   }
+
 }

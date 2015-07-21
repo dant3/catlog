@@ -1,8 +1,14 @@
 package com.github.dant3.catlog.ui
 
+import com.github.dant3.catlog.Application
 import com.github.dant3.catlog.util.GuiThreadExecutor
 import com.googlecode.lanterna.TextColor
 import com.googlecode.lanterna.gui2._
+
+trait GUI { self:Application ⇒
+  override def run(args:Array[String]):Unit = GUI.run { implicit gui ⇒ this.runGUI(args) }
+  def runGUI(args:Array[String])(implicit gui:WindowBasedTextGUI):Unit
+}
 
 object GUI {
   lazy val screenFactory = new ScreenFactory()
